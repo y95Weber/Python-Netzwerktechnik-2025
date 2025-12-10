@@ -9,11 +9,11 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
 
     while True:
         data, addr = sock.recvfrom(1024)
-        print(f"Received from {addr}: {data.decode()}")
+        client_message = int(data.decode())
+        print(f"Received from {addr}: {client_message}")
 
-        if data.decode() == "Ping":
-            response = b"Pong"
-        else:
-            response = b"Unknown"
+        # Nachricht von Client n + 1 setzen
+        server_response = str(client_message + 1).encode()
 
-        sock.sendto(response, addr)
+        # Nachricht an Client senden
+        sock.sendto(server_response, addr)
