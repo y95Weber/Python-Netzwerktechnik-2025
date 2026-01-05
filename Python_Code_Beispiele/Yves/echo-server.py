@@ -1,4 +1,5 @@
 import socket
+from http.client import responses
 
 HOST = "0.0.0.0" # Bindet an alle Netzwerkschnittstellen
 PORT = 65432
@@ -9,11 +10,8 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
 
     while True:
         data, addr = sock.recvfrom(1024)
-        client_message = int(data.decode())
-        print(f"Received from {addr}: {client_message}")
+        message = int(data.decode())
+        print(f"Received from Client {addr}: {message}")
 
-        # Nachricht von Client n + 1 setzen
-        server_response = str(client_message + 1).encode()
-
-        # Nachricht an Client senden
-        sock.sendto(server_response, addr)
+        response = str(message + 1).encode()
+        sock.sendto(response, addr)
