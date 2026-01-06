@@ -26,4 +26,4 @@
 
 2. **Ein ValueError wurde hinzugefügt, damit bei Falschem Datentyp (kein Int), das Programm eine Meldung dem User übergibt und beendet. (CodeZeile 23 - 28 beim Client, 19 - 23 bei Server)**
 
-3. **Ein Fehlerprüfung würde mithilfe einer Werterwartung hinzugefügt, damit wie bei TCP eine Art Paketüberprüfung stattfindet. (CodeZeile 32 - 35 beim Client, 28 - 30 bei Server)**
+3. **Ein Fehlerprüfung würde mithilfe einer Wert Erwartung hinzugefügt, damit wie bei TCP eine Art Paketüberprüfung stattfindet. (CodeZeile 32 - 35 beim Client, 28 - 30 bei Server)**
