@@ -24,12 +24,10 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
         try:
             received = int(data.decode())
         except ValueError:
-            print(f"Ungültige Antwort: {data}")
+            print(f"Wrong Datatype: {data}")
             break
 
-
-        print(f"Send: {message}, Received: {received}")
-
+        print(f"Send: {message}, Received from Server: {received}")
 
         # Fehlerprüfung (Ping-Pong-Protokoll)
         if  received != message_test:
