@@ -20,3 +20,10 @@
 
 6. Sobald n oder ein anderer Buchstabe als (J/j) eingegeben wird, Clint und Server werden beendet.
 
+**Funktionen mit Fehlerbehandlung
+
+1. **Timeout wurde hinzugefügt, damit bei keiner Eingabe durch den User oder bei Fehlern, das Programm beendet wird.(CodeZeile 16 - 21 beim Client, 13 - 17 bei Server)**
+
+2. **Ein ValueError wurde hinzugefügt, damit bei Falschem Datentyp (kein Int), das Programm eine Meldung dem User übergibt und beendet. (CodeZeile 23 - 28 beim Client, 19 - 23 bei Server)**
+
+3. **Ein Fehlerprüfung würde mithilfe einer Werterwartung hinzugefügt, damit wie bei TCP eine Art Paketüberprüfung stattfindet. (CodeZeile 32 - 35 beim Client, 28 - 30 bei Server)**
