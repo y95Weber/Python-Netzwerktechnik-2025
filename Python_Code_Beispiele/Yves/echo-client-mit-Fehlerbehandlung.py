@@ -1,8 +1,8 @@
 import socket # Importiert das Modul, um Sockets für Netzwerkkommunikation zu verwenden
 
 # Hostadresse und Portnummer angeben
-HOST = input("IP des Servers angeben: ")
-PORT = int(input("Portnummer angeben "))
+HOST = input("IP from Server or Proxy: ")
+PORT = int(input("Port of Server or Proxy: "))
 message = 1
 with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
     sock.settimeout(5) # Max. Wartezeit auf Antwort vom Server

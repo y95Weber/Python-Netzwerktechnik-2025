@@ -6,7 +6,7 @@ last_message = 0
 
 with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
     sock.bind((HOST, PORT))
-    sock.settimeout(50)
+    sock.settimeout(5)
     print(f"UDP server listening on {PORT}")
 
     while True:
@@ -22,7 +22,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
             print(f"Ungültige Daten von {addr}: {data}")
             continue
 
-        print(f"Received from Client {addr}: {message}")
+        print(f"Received from Client {addr}: {message}\n")
 
         # Fehlerprüfung: kommt die erwartete nächste Zahl?
         if message != last_message + 1:
