@@ -20,6 +20,8 @@
 
 6. Sobald n oder ein anderer Buchstabe als (J/j) eingegeben wird, Clint und Server werden beendet.
 
+
+
 **Funktionen mit Fehlerbehandlung**
 
 1. **Timeout wurde hinzugefügt, damit bei keiner Eingabe durch den User oder bei Fehlern, das Programm beendet wird.(CodeZeile 16 - 21 beim Client, 13 - 17 bei Server)**
