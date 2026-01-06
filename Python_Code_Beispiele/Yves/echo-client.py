@@ -5,14 +5,36 @@ HOST = input("IP des Servers angeben: ")
 PORT = int(input("Portnummer angeben "))
 message = 1
 with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
+    sock.settimeout(5) # Max. Wartezeit auf Antwort vom Server
+
+    # Nachricht Senden
     while True:
         # Nachricht an den Server senden
         sock.sendto(str(message).encode(), (HOST, PORT)) # Sendet Nachricht an angegebene IP und Port
+        message_test = message + 1
 
-        # Antwort vom Server empfangen und Ausgeben
-        data, addr = sock.recvfrom(1024) # Wartet auf Antwort vom Server
-        print(f"Send: {message}, Received: {data.decode()}")
-        message = int(data.decode())
+        # Antwort vom Server empfangen und testen ob timeout ok
+        try:
+            data, addr = sock.recvfrom(1024) # Wartet auf Antwort vom Server
+        except socket.timeout:
+            print("Timeout - no answer from Server")
+            break
+
+        # Speichert Antwort von Server und testet ob richtiger Wert
+        try:
+            received = int(data.decode())
+        except ValueError:
+            print(f"Ungültige Antwort: {data}")
+            break
+
+
+        print(f"Send: {message}, Received: {received}")
+
+
+        # Fehlerprüfung (Ping-Pong-Protokoll)
+        if  received != message_test:
+            print("UDP receive is wrong!!!")
+            break
 
         # UDP Ping Pong wiederholen ?
         again = input("Continue? (j/n): ").strip().lower()
@@ -21,4 +43,4 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
             break
         # Nächste Zahl vorbereiten
         else:
-            message += 1
+            message = received + 1
