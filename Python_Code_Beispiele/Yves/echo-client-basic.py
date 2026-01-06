@@ -17,8 +17,8 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
         # UDP Ping Pong wiederholen ?
         again = input("Continue? (j/n): ").strip().lower()
         if again != "j":
+            message = False
             print("Ping Pong finished!")
-            break
         # Nächste Zahl vorbereiten
         else:
             message += 1
