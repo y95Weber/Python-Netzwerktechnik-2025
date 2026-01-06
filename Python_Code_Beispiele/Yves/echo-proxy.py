@@ -14,6 +14,10 @@ print(f"Proxy listening on {PROXY_PORT}")
 with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as proxy:
     proxy.bind((PROXY_HOST,PROXY_PORT))
 
+    # Persistentes Socket für Server erstellen (Quellport bleibt gleich)
+    server_sock = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+    server_sock.settimeout(5)
+
     # Pakete senden und Empfangen
     while True:
         # Paket von Client empfangen
@@ -21,13 +25,15 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as proxy:
         print(f"[Proxy] From client {client_addr}: {data.decode()}")
 
         # Paket an Server weiterleiten
-        with socket.socket(socket.AF_INET,socket.SOCK_DGRAM) as server_sock:
-            server_sock.settimeout(5)
-            server_sock.sendto(data, (SERVER_HOST, SERVER_PORT))
+        server_sock.sendto(data, (SERVER_HOST, SERVER_PORT))
 
-            # Antwort vom Server empfangen
+        # Antwort vom Server empfangen --> Mit Timeout
+        try:
             response, _ = server_sock.recvfrom(1024)
-            print(f"[Proxy] From Server: {response.decode()}")
+        except socket.timeout:
+            print("[Proxy] Timeout - no response from server")
+
+        print(f"[Proxy] From Server: {response.decode()}")
 
         # Antwort zurück an den Client
         proxy.sendto(response, client_addr)
