@@ -10,7 +10,7 @@ last_message = 0
 
 with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
     sock.bind((HOST, PORT))
-    sock.settimeout(5)
+    sock.settimeout(60)
     print(f"UDP server listening on {PORT}")
 
     while True:
