@@ -1,8 +1,16 @@
 import socket # Importiert das Modul, um Sockets für Netzwerkkommunikation zu verwenden
 
 # Hostadresse und Portnummer angeben
-HOST = input("IP from Server or Proxy: ")
-PORT = int(input("Port of Server or Proxy: "))
+host_input = input("IP from Server or Proxy (default localhost): ").strip()
+if host_input == "" or host_input.lower() == "localhost":
+    HOST = "127.0.0.1"
+else:
+    HOST = host_input
+
+port_input = input("Port of Server or Proxy (default 65432): ").strip()
+PORT = int(port_input) if port_input else 65432
+
+
 message = 1
 with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
     sock.settimeout(5) # Max. Wartezeit auf Antwort vom Server

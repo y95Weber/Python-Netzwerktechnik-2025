@@ -1,12 +1,22 @@
 import socket
 
-# Adresse des Proxy (Der Client sendet dort hin)
+# Adresse des Proxy mit variablem Port(Der Client sendet dort hin)
 PROXY_HOST = "0.0.0.0"
-PROXY_PORT = 50000
+# Variabler Port aber default 50000
+proxy_port_input = input("Proxy listen Port (default 50000): ").strip()
+PROXY_PORT = int(proxy_port_input) if proxy_port_input else 50000
 
-# Adresse der Servers (Proxy sendet an diesen Server)
-SERVER_HOST = "127.0.0.1"
-SERVER_PORT = 65432
+
+# Eingeben Der Server Adresse
+server_input = input("Server IP (default localhost): ").strip()
+if server_input == "" or server_input.lower() == "localhost":
+    SERVER_HOST = "127.0.0.1"
+else:
+    SERVER_HOST = server_input
+
+server_port_input = input("Server Port (default 65432): ").strip()
+SERVER_PORT = int(server_port_input) if server_port_input else 65432
+
 
 print(f"Proxy listening on {PROXY_PORT}")
 

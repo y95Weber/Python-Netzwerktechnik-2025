@@ -1,7 +1,11 @@
 import socket
 
+# Adresse vom Server mit variablem Port (Client oder Proxy senden dort hin)
 HOST = "0.0.0.0" # Bindet an alle Netzwerkschnittstellen
-PORT = 65432
+# Variabler Port aber default 65432
+port_input = input("Server listen Port (default 65432): ").strip()
+PORT = int(port_input) if port_input else 65432
+
 last_message = 0
 
 with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
