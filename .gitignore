@@ -1,0 +1,11 @@
+# PyCharm / IntelliJ
+.idea/
+*.iml
+
+# Virtualenv
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
