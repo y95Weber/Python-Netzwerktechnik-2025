@@ -6,7 +6,7 @@ HOST = "0.0.0.0" # Bindet an alle Netzwerkschnittstellen
 port_input = input("Server listen Port (default 65432): ").strip()
 PORT = int(port_input) if port_input else 65432
 
-last_message = 0
+last_message = None
 
 with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
     sock.bind((HOST, PORT))
@@ -28,10 +28,13 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
 
         print(f"Received from Client {addr}: {message}\n")
 
+        if last_message is None:
+            last_message = message
         # Fehlerprüfung: kommt die erwartete nächste Zahl?
-        if message != last_message + 1:
-            print("UDP receive is wrong on SERVER!!!")
-        last_message += 2
+        else:
+            if message != last_message + 2:
+                print("UDP receive is wrong on SERVER!!!")
+            last_message = message
         # Antwort zurück
         response = str(message + 1).encode()
         sock.sendto(response, addr)

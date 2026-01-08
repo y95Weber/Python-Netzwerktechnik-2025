@@ -10,8 +10,10 @@ else:
 port_input = input("Port of Server or Proxy (default 65432): ").strip()
 PORT = int(port_input) if port_input else 65432
 
+start_input = input("Start number (default 1): ").strip()
+message = int(start_input) if start_input else 1
 
-message = 1
+
 with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
     sock.settimeout(5) # Max. Wartezeit auf Antwort vom Server
 

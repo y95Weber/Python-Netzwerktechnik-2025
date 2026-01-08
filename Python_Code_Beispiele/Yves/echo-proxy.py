@@ -3,7 +3,7 @@ import socket
 # Adresse des Proxy mit variablem Port(Der Client sendet dort hin)
 PROXY_HOST = "0.0.0.0"
 # Variabler Port aber default 50000
-proxy_port_input = input("Proxy listen Port (default 50000): ").strip()
+proxy_port_input = input("Proxy listen Port (default 50000): \n").strip()
 PROXY_PORT = int(proxy_port_input) if proxy_port_input else 50000
 
 
